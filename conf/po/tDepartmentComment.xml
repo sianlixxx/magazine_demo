@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TDepartmentComment">
+	 <resultMap id="tDepartmentComment" class="weimin.magazine.back.dao.pojo.TDepartmentComment">
+		<result property="commentId" column="comment_id" columnIndex="1"/>
+		<result property="departmentId" column="department_id" columnIndex="2"/>
+		<result property="userId" column="user_id" columnIndex="3"/>
+		<result property="createdAt" column="created_at" columnIndex="4"/>
+		<result property="content" column="content" columnIndex="5"/>
+		<result property="level" column="level" columnIndex="6"/>
+		<result property="score" column="score" columnIndex="7"/>
+	</resultMap>
+	
+	<select id="queryTDepartmentCommentById" parameterClass="long" resultMap="tDepartmentComment" >
+    	SELECT * 
+    	FROM `magazine`.`t_department_comment` 
+    	where comment_id=#commentId#;
+    </select>
+    
+    <select id="queryAllTDepartmentComment" resultMap="tDepartmentComment">
+    	SELECT * 
+    	FROM `magazine`.`t_department_comment`;
+    </select> 
+    
+    <update id="updateTDepartmentComment" >
+    	update `magazine`.`t_department_comment` 
+    	set
+    	department_id=#departmentId#,
+    	user_id=#userId#,
+    	created_at=#createdAt#,
+    	content=#content#,
+    	level=#level#,
+    	score=#score#
+    	where 
+    	comment_id=#commentId#;
+   	</update>
+   	
+    <insert id="insertTDepartmentComment"> 
+    	INSERT INTO `magazine`.`t_department_comment`
+    	( `department_id`,`user_id`,`created_at`,`content`,`level`,`score`) 
+    	VALUES 
+    	( #departmentId#,#userId#,#createdAt#,#content#,#level#,#score#);
+    	
+    	<selectKey  keyProperty="commentId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTDepartmentCommentById" parameterClass="long">
+    	delete from `magazine`.`t_department_comment`  
+    	where comment_id = #commentId#;
+   	</delete>
+   	
+   	<!--  检索用户所发表的所有评论 -->
+   	<select id="queryCommentsByUserId" parameterClass="long" resultMap="tDepartmentComment" >
+    	SELECT * 
+    	FROM `magazine`.`t_department_comment` 
+    	where user_id=#userId#;
+    </select>
+   	
+
+</sqlMap>

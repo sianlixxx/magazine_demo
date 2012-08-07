@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TAccessToken">
+	 <resultMap id="tAccessToken" class="weimin.magazine.back.dao.pojo.TAccessToken">
+		
+		<result property="userId" column="user_id" columnIndex="1"/>
+		<result property="uid" column="uid" columnIndex="2"/>
+		<result property="accessToken" column="accessToken" columnIndex="3"/>
+		<result property="expireIn" column="expireIn" columnIndex="4"/>
+		<result property="refreshToken" column="refreshToken" columnIndex="5"/>
+	</resultMap>
+	
+	<select id="queryTAccessTokenById" parameterClass="long" resultMap="tAccessToken" >
+    	SELECT * 
+    	FROM `magazine`.`t_access_token` 
+    	where user_id=#userId#;
+    </select>
+    
+    <select id="queryAllTAccessToken" resultMap="tAccessToken">
+    	SELECT * 
+    	FROM `magazine`.`t_access_token`;
+    </select> 
+    
+    <update id="updateTAccessToken" >
+    	update `magazine`.`t_access_token` 
+    	set
+    	uid=#uid#,
+    	accessToken=#accessToken#,
+    	expireIn=#expireIn#,
+    	refreshToken=#refreshToken#
+    	where user_id=#userId#;
+   	</update>
+   	
+    <insert id="insertTAccessToken" > 
+    	INSERT INTO `magazine`.`t_access_token` 
+    	( `user_id`,`uid`,`accessToken`,`expireIn`,`refreshToken`) 
+    	VALUES 
+    	( #userId#,#uid#, #accessToken#, #expireIn#, #refreshToken#);
+    	<selectKey  keyProperty="userId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTAccessTokenById" parameterClass="long">
+    	delete from `magazine`.`t_access_token`  
+    	where user_id=#userId#;
+   	</delete>
+   	
+   	<!-- 根据微博uid查询记录-->
+   	<select id="queryTAccessTokenByUid" parameterClass="long" resultMap="tAccessToken" >
+    	SELECT * 
+    	FROM `magazine`.`t_access_token` 
+    	where uid=#uid#;
+    </select>
+
+</sqlMap>

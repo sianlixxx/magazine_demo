@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TDepartmentEditor">
+	 <resultMap id="tDepartmentEditor" class="weimin.magazine.back.dao.pojo.TDepartmentEditor">
+		<result property="editorId" column="editor_id" columnIndex="1"/>
+		<result property="userId" column="user_id" columnIndex="2"/>
+		<result property="departmentId" column="department_id" columnIndex="3"/>
+		<result property="editerChief" column="editer_chief" columnIndex="4"/>
+		<result property="editerAt" column="editer_at" columnIndex="5"/>
+	</resultMap>
+	
+	<select id="queryTDepartmentEditorById" parameterClass="long" resultMap="tDepartmentEditor" >
+    	SELECT * 
+    	FROM `magazine`.`t_department_editor` 
+    	where editor_id=#editorId#;
+    </select>
+    
+    <select id="queryAllTDepartmentEditor" resultMap="tDepartmentEditor">
+    	SELECT * 
+    	FROM `magazine`.`t_department_editor`;
+    </select> 
+    
+    <update id="updateTDepartmentEditor" >
+    	update `magazine`.`t_department_editor` 
+    	set
+    	user_id=#userId#,
+    	department_id=#departmentId#,
+    	editer_chief=#editerChief#,
+    	editer_at=#editerAt#
+    	where 
+    	editor_id=#editorId#;
+   	</update>
+   	
+    <insert id="insertTDepartmentEditor"> 
+    	INSERT INTO `magazine`.`t_department_editor`
+    	( `user_id`,`department_id`,`editer_chief`,`editer_at`) 
+    	VALUES 
+    	( #userId#,#departmentId#,#editerChief#,#editerAt#);
+    	
+    	<selectKey  keyProperty="editorId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTDepartmentEditorById" parameterClass="long">
+    	delete from `magazine`.`t_department_editor`  
+    	where editor_id=#editorId#;
+   	</delete>
+   	
+   	<!-- 根据编辑部id查询所有编辑-->
+   	<select id="queryAllEditorByDepartmentId" parameterClass="long"  resultMap="tDepartmentEditor">
+    	SELECT * 
+    	FROM `magazine`.`t_department_editor`
+    	where department_id=#departmentId#;
+    </select> 
+
+</sqlMap>

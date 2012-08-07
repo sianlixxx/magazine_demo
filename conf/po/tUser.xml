@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TUser">
+	 <resultMap id="tUser" class="weimin.magazine.back.dao.pojo.TUser">
+		<result property="userId" column="user_id" columnIndex="1"/>
+		<result property="uid" column="uid" columnIndex="2"/>
+		<result property="screenName" column="screen_name" columnIndex="3"/>
+		<result property="name" column="name" columnIndex="4"/>
+		<result property="province" column="province" columnIndex="5"/>
+		<result property="city" column="city" columnIndex="6"/>
+		<result property="location" column="location" columnIndex="7"/>
+		<result property="description" column="description" columnIndex="8"/>
+		<result property="blogUrl" column="blog_url" columnIndex="9"/>
+		<result property="profileImageUrl" column="profile_image_url" columnIndex="10"/>
+		<result property="domain" column="domain" columnIndex="11"/>
+		<result property="weihao" column="weihao" columnIndex="12"/>
+		<result property="gender" column="gender" columnIndex="13"/>
+		<result property="followersCount" column="followers_count" columnIndex="14"/>
+		<result property="friendsCount" column="friends_count" columnIndex="15"/>
+		<result property="statusesCount" column="statuses_count" columnIndex="16"/>
+		<result property="favouritesCount" column="favourites_count" columnIndex="17"/>
+		<result property="createdAt" column="created_at" columnIndex="18"/>
+		<result property="allowAllActMsg" column="allow_all_act_msg" columnIndex="19"/>
+		<result property="geoEnabled" column="geo_enabled" columnIndex="20"/>
+		<result property="verified" column="verified" columnIndex="21"/>
+		<result property="verifiedType" column="verified_type" columnIndex="22"/>
+		<result property="allowAllComment" column="allow_all_comment" columnIndex="23"/>
+		<result property="avatarLarge" column="avatar_large" columnIndex="24"/>
+		<result property="verifiedReason" column="verified_reason" columnIndex="25"/>
+		<result property="followMe" column="follow_me" columnIndex="26"/>
+		<result property="onlineStatus" column="online_status" columnIndex="27"/>
+		<result property="biFollowersCount" column="bi_followers_count" columnIndex="28"/>
+		<result property="submissionCount" column="submission_count" columnIndex="29"/>
+		<result property="subscribeCount" column="subscribe_count" columnIndex="30"/>
+		<result property="participateCount" column="participate_count" columnIndex="31"/>
+		<result property="createEnabled" column="create_enabled" columnIndex="32"/>
+		<result property="userDomain" column="user_domain" columnIndex="33"/>
+		<result property="userSource" column="user_source" columnIndex="34"/>
+		<result property="lastLoginTime" column="last_login_time" columnIndex="35"/>
+	</resultMap>
+	
+	<select id="queryTUserById" parameterClass="long" resultMap="tUser" >
+    	SELECT * 
+    	FROM `magazine`.`t_user` 
+    	where user_id=#userId#;
+    </select>
+    
+    <select id="queryAllTUser" resultMap="tUser">
+    	SELECT * 
+    	FROM `magazine`.`t_user`;
+    </select> 
+    
+    <update id="updateTUser" >
+    	update `magazine`.`t_user` 
+    	set
+    	uid=#uid#,
+    	screen_name=#screenName#,
+    	name=#name#,
+    	province=#province#,
+    	city=#city#,
+    	
+    	location=#location#,
+    	description=#description#,
+    	blog_url=#blogUrl#,
+    	profile_image_url=#profileImageUrl#,
+    	domain=#domain#,
+    	
+    	weihao=#weihao#,
+    	gender=#gender#,
+    	followers_count=#followersCount#,
+    	friends_count=#friendsCount#,
+    	statuses_count=#statusesCount#,
+    	favourites_count=#favouritesCount#,
+    	
+    	created_at=#createdAt#,
+    	allow_all_act_msg=#allowAllActMsg#,
+    	geo_enabled=#geoEnabled#,
+    	verified=#verified#,
+    	verified_type=#verifiedType#,
+    	allow_all_comment=#allowAllComment#,
+    	
+    	avatar_large=#avatarLarge#,
+    	verified_reason=#verifiedReason#,
+    	follow_me=#followMe#,
+    	online_status=#onlineStatus#,
+    	bi_followers_count=#biFollowersCount#,
+    	submission_count=#submissionCount#,
+    	
+    	subscribe_count=#subscribeCount#,
+    	participate_count=#participateCount#,
+    	create_enabled=#createEnabled#,
+    	user_domain=#userDomain#,
+    	user_source=#userSource#,
+    	last_login_time=#lastLoginTime#
+    	where user_id=#userId#;
+   	</update>
+   	
+    <insert id="insertTUser" > 
+    	INSERT INTO `magazine`.`t_user` 
+    	( `uid`,`screen_name`,`name`,`province`,`city`,
+    	`location`,`description`,`blog_url`,`profile_image_url`,`domain`,
+    	`weihao`,`gender`,`followers_count`,`friends_count`,`statuses_count`,
+    	`favourites_count`,`created_at`,`allow_all_act_msg`,`geo_enabled`,`verified`,
+    	`verified_type`,`allow_all_comment`,`avatar_large`,`verified_reason`,`follow_me`,
+    	`online_status`,`bi_followers_count`,`submission_count`,`subscribe_count`,`participate_count`,
+    	`create_enabled`,`user_domain`,`user_source`,`last_login_time`) 
+    	VALUES 
+    	( #uid#, #screenName#,#name#,#province#, #city#,
+    	#location#, #description#,#blogUrl#,#profileImageUrl#, #domain#,
+    	#weihao#, #gender#,#followersCount#,#friendsCount#, #statusesCount#,
+    	#favouritesCount#, #createdAt#,#allowAllActMsg#,#geoEnabled#, #verified#,
+    	#verifiedType#, #allowAllComment#,#avatarLarge#,#verifiedReason#, #followMe#,
+    	#onlineStatus#, #biFollowersCount#,#submissionCount#,#subscribeCount#, #participateCount#,
+    	#createEnabled#, #userDomain#,#userSource#,#lastLoginTime#);
+    	
+    	<selectKey  keyProperty="userId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTUserById" parameterClass="long">
+    	delete from `magazine`.`t_user`  
+    	where user_id=#userId#;
+   	</delete>
+   	
+   		<!-- 根据微博uid查询记录-->
+   	<select id="queryTUserByUid" parameterClass="long" resultMap="tUser" >
+    	SELECT * 
+    	FROM `magazine`.`t_user` 
+    	where uid=#uid#;
+    </select>
+    
+    <!-- 用户增加一次订阅-->
+     <update id="updateTUser4addSubscribe" parameterClass="long" >
+     	update `magazine`.`t_user` 
+    	set
+    	subscribe_count=subscribe_count+1
+    	where user_id=#userId#;
+     </update>
+
+</sqlMap>

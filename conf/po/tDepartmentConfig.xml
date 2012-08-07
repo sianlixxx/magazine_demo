@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TDepartmentConfig">
+	 <resultMap id="tDepartmentConfig" class="weimin.magazine.back.dao.pojo.TDepartmentConfig">
+		<result property="departmentConfigId" column="department_config_id" columnIndex="1"/>
+		<result property="departmentId" column="department_id" columnIndex="2"/>
+		<result property="configType" column="config_type" columnIndex="3"/>
+		<result property="configValue" column="config_value" columnIndex="4"/>
+	</resultMap>
+	
+	<select id="queryTDepartmentConfigById" parameterClass="long" resultMap="tDepartmentConfig" >
+    	SELECT * 
+    	FROM `magazine`.`t_department_config` 
+    	where department_config_id=#id#;
+    </select>
+    
+    <select id="queryAllTDepartmentConfig" resultMap="tDepartmentConfig">
+    	SELECT * 
+    	FROM `magazine`.`t_department_config`;
+    </select> 
+    
+    <update id="updateTDepartmentConfig" >
+    	update `magazine`.`t_department_config` 
+    	set
+    	department_id=#departmentId#,
+    	config_type=#configType#,
+    	config_value=#configValue#
+    	where 
+    	department_config_id=#departmentConfigId#;
+   	</update>
+   	
+    <insert id="insertTDepartmentConfig"> 
+    	INSERT INTO `magazine`.`t_department_config`
+    	( `department_id`,`config_type`,`config_value`) 
+    	VALUES 
+    	( #departmentId#,#configType#,#configValue#);
+    	
+    	<selectKey  keyProperty="departmentConfigId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTDepartmentConfigById" parameterClass="long">
+    	delete from `magazine`.`t_department_config`  
+    	where department_config_id = #departmentConfigId#;
+   	</delete>
+
+</sqlMap>

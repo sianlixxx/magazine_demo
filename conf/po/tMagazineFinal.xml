@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TMagazineFinal">
+	 <resultMap id="tMagazineFinal" class="weimin.magazine.back.dao.pojo.TMagazineFinal">
+		<result property="magazineId" column="magazine_id" columnIndex="1"/>
+		<result property="departmentId" column="department_id" columnIndex="2"/>
+		<result property="createrUserId" column="creater_user_id" columnIndex="3"/>
+		<result property="name" column="name" columnIndex="4"/>
+		<result property="serialNumber" column="serial_number" columnIndex="5"/>
+		<result property="createdAt" column="created_at" columnIndex="6"/>
+		<result property="magazineUrl" column="magazine_url" columnIndex="7"/>
+		<result property="readCount" column="read_count" columnIndex="8"/>
+		<result property="commentCount" column="comment_count" columnIndex="9"/>
+		<result property="contributeCount" column="contribute_count" columnIndex="10"/>
+		<result property="status" column="status" columnIndex="11"/>
+		<result property="publishAt" column="publish_at" columnIndex="12"/>
+		<result property="description" column="description" columnIndex="13"/>
+		<result property="coverPic" column="cover_pic" columnIndex="14"/>
+		<result property="tempContent" column="tempContent" columnIndex="15"/>
+	</resultMap>
+	
+	<select id="queryTMagazineFinalById" parameterClass="long" resultMap="tMagazineFinal" >
+    	SELECT * 
+    	FROM `magazine`.`t_magazine_final` 
+    	where 
+    	magazine_id=#magazineId#;
+    </select>
+    
+    <select id="queryAllTMagazineFinal" resultMap="tMagazineFinal">
+    	SELECT * 
+    	FROM `magazine`.`t_magazine_final`;
+    </select> 
+    
+    <update id="updateTMagazineFinal" >
+    	update `magazine`.`t_magazine_final` 
+    	set
+    	department_id=#departmentId#,
+    	creater_user_id=#createrUserId#,
+    	name=#name#,
+    	serial_number=#serialNumber#,
+    	created_at=#createdAt#,
+    	magazine_url=#magazineUrl#,
+    	read_count=#readCount#,
+    	comment_count=#commentCount#,
+    	contribute_count=#contributeCount#,
+    	status=#status#,
+    	publish_at=#publishAt#,
+    	description=#description#,
+    	cover_pic=#coverPic#,
+    	tempContent=#tempContent#
+    	where 
+    	magazine_id=#magazineId#;
+   	</update>
+   	
+    <insert id="insertTMagazineFinal"> 
+    	INSERT INTO `magazine`.`t_magazine_final`
+    	( `department_id`,`creater_user_id`,`name`,`serial_number`,`created_at`,`magazine_url`,`read_count`,`comment_count`,`contribute_count`,`status`,`publish_at`,`description`,`cover_pic`,`tempContent`) 
+    	VALUES 
+    	( #departmentId#,#createrUserId#,#name#, #serialNumber#,#createdAt#,#magazineUrl#, #readCount#,#commentCount#,#contributeCount#, #status#,#publishAt#,#description#,#coverPic#,#tempContent#);
+    	
+    	<selectKey  keyProperty="magazineId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTMagazineFinalById" parameterClass="long">
+    	delete from `magazine`.`t_magazine_final`  
+    	where 
+    	magazine_id=#magazineId#;
+   	</delete>
+   	
+   	 <!--  查询当前杂志的序列号-->
+     <select id="createSerialNumber"  resultClass="int">
+    	SELECT max(serial_number) FROM `magazine`.`t_magazine_final` 
+    	where  department_id=#departmentId# ;
+   	 </select>
+   	 
+   	  <!--  查询当前杂志社的最新期刊-->
+   	 <select id="queryCurrentTMagazineFinalBydepartmentId" parameterClass="long" resultMap="tMagazineFinal" >
+    	SELECT * FROM magazine.t_magazine_final 
+    	where department_id=#departmentId# and serial_number = (
+    		select max(serial_number) 
+    		FROM magazine.t_magazine_final 
+    		where department_id=#departmentId#); 
+     </select>
+
+</sqlMap>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TUserClip">
+	 <resultMap id="tUserClip" class="weimin.magazine.back.dao.pojo.TUserClip">
+		<result property="userClipId" column="user_clip_id" columnIndex="1"/>
+		<result property="userId" column="user_id" columnIndex="2"/>
+		<result property="departmentId" column="department_id" columnIndex="3"/>
+		<result property="magazineId" column="magazine_id" columnIndex="4"/>
+		<result property="content" column="content" columnIndex="5"/>
+		<result property="domain" column="domain" columnIndex="6"/>
+		<result property="clipTime" column="clip_time" columnIndex="7"/>
+	</resultMap>
+	
+	<select id="queryTUserClipById" parameterClass="long" resultMap="tUserClip" >
+    	SELECT * 
+    	FROM `magazine`.`t_user_clip` 
+    	where user_clip_id=#userClipId#;
+    </select>
+    
+    <select id="queryAllTUserClip" resultMap="tUserClip">
+    	SELECT * 
+    	FROM `magazine`.`t_user_clip`;
+    </select> 
+    
+    <update id="updateTUserClip" >
+    	update `magazine`.`t_user_clip` 
+    	set
+    	user_id=#userId#,
+    	department_id=#departmentId#,
+    	magazine_id=#magazineId#,
+    	content=#content#,
+    	domain=#domain#,
+    	clip_time=#clipTime#
+    	where user_clip_id=#userClipId#;
+   	</update>
+   	
+    <insert id="insertTUserClip" > 
+    	INSERT INTO `magazine`.`t_user_clip` 
+    	( `user_id`,`department_id`,`magazine_id`,`content`,`domain`,`clip_time`) 
+    	VALUES 
+    	( #userId#, #departmentId#, #magazineId#,#content#,#domain#, #clipTime#);
+    	
+    	<selectKey  keyProperty="userClipId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTUserClipById" parameterClass="long">
+    	delete from `magazine`.`t_user_clip`  
+    	where user_clip_id=#userClipId#;
+   	</delete>
+
+</sqlMap>

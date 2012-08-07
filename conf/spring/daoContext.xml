@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">  
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />  
+        <property name="url" value="jdbc:mysql://172.20.50.19:3306/magazine" />  
+        <property name="username" value="root" />  
+        <property name="password" value="123" />  
+    </bean>
+    
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">  
+        <property name="configLocation" value="classpath:/sqlMapConfig.xml"/>  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property>  
+    </bean>  
+    
+    <bean id="tLabelDAO" class="weimin.magazine.back.dao.impl.TLabelDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+     <bean id="tAccessTokenDAO" class="weimin.magazine.back.dao.impl.TAccessTokenDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+     <bean id="tDepartmentDAO" class="weimin.magazine.back.dao.impl.TDepartmentDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    <bean id="tDepartmentCommentDAO" class="weimin.magazine.back.dao.impl.TDepartmentCommentDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    <bean id="tDepartmentConfigDAO" class="weimin.magazine.back.dao.impl.TDepartmentConfigDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    <bean id="tDepartmentEditorDAO" class="weimin.magazine.back.dao.impl.TDepartmentEditorDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    <bean id="tMagazineFinalDAO" class="weimin.magazine.back.dao.impl.TMagazineFinalDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    <bean id="tMagazineModelDAO" class="weimin.magazine.back.dao.impl.TMagazineModelDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    <bean id="tTopMagazineDAO" class="weimin.magazine.back.dao.impl.TTopMagazineDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    <bean id="tMagazinethemeDAO" class="weimin.magazine.back.dao.impl.TMagazineThemeDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    <bean id="tUserDAO" class="weimin.magazine.back.dao.impl.TUserDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    <bean id="tUserClipDAO" class="weimin.magazine.back.dao.impl.TUserClipDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    <bean id="tUserConfigDAO" class="weimin.magazine.back.dao.impl.TUserConfigDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+     <bean id="tUserContributeDAO" class="weimin.magazine.back.dao.impl.TUserContributeDaoImpl">  
+        <!-- dataSource不是必需 -->  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    <bean id="tUserSubscribeDAO" class="weimin.magazine.back.dao.impl.TUserSubscribeDaoImpl">  
+        <!-- dataSource不是必需 -->         
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+        <!-- sqlMapClient必需 -->  
+        <property name="sqlMapClient">  
+            <ref local="sqlMapClient"/>  
+        </property>     
+    </bean>
+    
+    
+    <!-- transactionManager不是必需  -->  
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property> 
+         
+    </bean> 
+
+</beans> 

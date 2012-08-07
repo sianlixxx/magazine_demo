@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="baseService" class="weimin.magazine.back.service.BaseService"  >
+		<!--Dao  -->
+		<property name="tAccessTokenDaoImpl"  ref = "tAccessTokenDAO" />
+        <property name="tUserDaoImpl"  ref = "tUserDAO" />
+        <property name="tLabelDaoImpl"  ref = "tLabelDAO" />
+        <property name="tDepartmentDaoImpl"  ref = "tDepartmentDAO" />
+        <property name="tDepartmentEditorDaoImpl"  ref = "tDepartmentEditorDAO" />
+        <property name="tUserSubscribeDaoImpl"  ref = "tUserSubscribeDAO" />
+        <property name="tMagazineFinalDaoImpl"  ref = "tMagazineFinalDAO" />
+        <property name="tDepartmentCommentDaoImpl"  ref = "tDepartmentCommentDAO" />
+        <property name="tUserContributeDaoImpl"  ref = "tUserContributeDAO" />
+        <property name="tMagazineThemeDaoImpl"  ref = "tMagazinethemeDAO" />
+    </bean>
+
+
+	<bean id="oAuth2Service" class="weimin.magazine.back.service.OAuth2Service" parent="baseService"> </bean> 
+    
+    <bean id="recommendService" class="weimin.magazine.back.service.RecommendService" parent="baseService"></bean>
+    
+    <bean id="editService" class="weimin.magazine.back.service.EditService"  parent="baseService"></bean>
+    
+    <bean id="readService" class="weimin.magazine.back.service.ReadService"  parent="baseService">
+    	<property name="recommendService"  ref = "recommendService" />
+    </bean>
+    
+    <bean id="backService" class="weimin.magazine.back.service.BackService"  parent="baseService">
+    	<property name="recommendService"  ref = "recommendService" />
+    </bean>
+    
+    <bean id="queueService" class="weimin.magazine.back.service.QueueService"  parent="baseService"></bean>
+    
+    	
+    
+    
+
+</beans> 
