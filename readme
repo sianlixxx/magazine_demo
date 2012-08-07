@@ -1,0 +1,27 @@
+本地开发需确保：
+1.可以联网
+2.redis服务已启动（桌面redis-service）
+3.mysql已正常启动，
+
+确保一下配置正确：
+1.mysql配置文件(conf/spring/daoContext.xml)配置正确，其中mysql的地址127.0.0.1，用户名：root，密码：rootroot
+2.应用回调地址使用本地配置。(将配置文件 conf/config.properties 中服务器配置注释并打开本地服务器地址)
+3.redis 配置为本机地址（conf/redisConfig.xml）
+
+阅读杂志需确保引导路径正确，需确保一下内容：
+1.db中杂志url地址中172.20.50.19需修改为127.0.0.1
+2. weimin.magazine.front.action.InitAction 中以下内容解除注释，
+request.setAttribute("magurl", "http://127.0.0.1:8080/magazine_demo/html/show/showMag.html");
+同时注释上一句。
+
+        
+相关开发工具：
+1.redis-cli （redis客户端工具）
+2.mysql workben （mysql工具）
+
+相关数据：
+1.桌面create table.sql 为数据库建库脚本，magazine.mwb为数据库模型
+（若修改记得同步svn中myproject\trunk\00docs\02设计文档\db\workbench）
+2.需要测试数据，根据需要修改junit相关数据并运行即可；
+3.redis每次重启，数据丢失，若需要测试数据可根据需要修改junit相关数据并运行即可；
+4.测试数据也可通过mysql workben直接修改db，或者通过redis-cli修改缓存。
