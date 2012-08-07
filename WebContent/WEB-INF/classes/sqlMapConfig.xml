@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE sqlMapConfig
+PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig> 
+   <!--此处一定不能有<settings/> 标签-->  
+   <!-- -->
+   
+    <sqlMap resource="po/tLabel.xml" /> 
+    <sqlMap resource="po/tAccessToken.xml" />
+    <sqlMap resource="po/tDepartment.xml" /> 
+    <sqlMap resource="po/tDepartmentComment.xml" />
+    <sqlMap resource="po/tDepartmentConfig.xml" />
+    <sqlMap resource="po/tDepartmentEditor.xml" />
+    <sqlMap resource="po/tMagazineFinal.xml" />
+    <sqlMap resource="po/tMagazineModel.xml" />
+    <sqlMap resource="po/tMagazineTheme.xml" />
+    <sqlMap resource="po/tTopMagazine.xml" />
+    <sqlMap resource="po/tUser.xml" />
+    <sqlMap resource="po/tUserClip.xml" />
+    <sqlMap resource="po/tUserConfig.xml" />
+    <sqlMap resource="po/tUserContribute.xml" />
+    <sqlMap resource="po/tUserSubscribe.xml" />
+    
+    
+      
+</sqlMapConfig>  

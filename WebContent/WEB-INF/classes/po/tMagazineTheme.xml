@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TMagazineTheme">
+	 <resultMap id="tMagazineTheme" class="weimin.magazine.back.dao.pojo.TMagazineTheme">
+		<result property="magazineThemeId" column="magazine_theme_id" columnIndex="1"/>
+		<result property="magazineThemeType" column="magazine_theme_type" columnIndex="2"/>
+		<result property="magazineThemeDes" column="magazine_theme_des" columnIndex="3"/>
+		<result property="magazineThemeContent" column="magazine_theme_content" columnIndex="4"/>
+		<result property="magazineThemeUsed" column="magazine_theme_used" columnIndex="5"/>
+		<result property="departmentId" column="department_id" columnIndex="6"/>
+	</resultMap>
+	
+	<resultMap id="magazineThemeType" class="int">
+		<result property="magazineThemeType" column="magazine_theme_type" columnIndex="2"/>
+	</resultMap>
+	
+	<select id="queryTMagazineThemeById" parameterClass="long" resultMap="tMagazineTheme" >
+    	SELECT * 
+    	FROM `magazine`.`t_magazine_theme` 
+    	where magazine_theme_id=#magazineThemeId#;
+    </select>
+    
+    <select id="queryAllTMagazineTheme" resultMap="tMagazineTheme">
+    	SELECT * 
+    	FROM `magazine`.`t_magazine_theme`;
+    </select> 
+    
+    <update id="updateTMagazineTheme" >
+    	update `magazine`.`t_magazine_theme` 
+    	set
+    	magazine_theme_type=#magazineThemeType#,
+    	magazine_theme_des=#magazineThemeDes#,
+    	magazine_theme_content=#magazineThemeContent#,
+    	magazine_theme_used=#magazineThemeUsed#,
+    	department_id=#departmentId#
+    	where magazine_theme_id = #magazineThemeId#;
+   	</update>
+   	
+    <insert id="insertTMagazineTheme" > 
+    	INSERT INTO `magazine`.`t_magazine_theme` 
+    	( `magazine_theme_type`, `magazine_theme_des`, `magazine_theme_content`, `magazine_theme_used`, `department_id`) 
+    	VALUES 
+    	( #magazineThemeType#, #magazineThemeDes#, #magazineThemeContent#, #magazineThemeUsed#, #departmentId#);
+    	
+    	<selectKey  keyProperty="magazineThemeId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTMagazineThemeById" parameterClass="long">
+    	delete from `magazine`.`t_magazine_theme`  
+    	where magazine_theme_id = #magazineThemeId#;
+   	</delete>
+   	
+   	 <!--  获取所有杂志类别名称，去除重复，按照现有表中使用次数排列-->
+     <select id="queryRecommendThemes"  resultMap="tMagazineTheme">
+     	select *  from magazine.t_magazine_theme 
+     	group by magazine_theme_content 
+     	order by count(magazine_theme_content) desc;
+   	</select>
+   	
+   	 <!--  获取所有杂志类别-->
+     <select id="queryThemeTypes"  resultMap="magazineThemeType">
+     	select magazine_theme_type  
+     	from `magazine`.`t_magazine_theme` 
+     	group by magazine_theme_content ;
+   	</select>
+
+</sqlMap>

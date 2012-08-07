@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TMagazineModel">
+	 <resultMap id="tMagazineModel" class="weimin.magazine.back.dao.pojo.TMagazineModel">
+		<result property="modelId" column="model_id" columnIndex="1"/>
+		<result property="modelType" column="model_type" columnIndex="2"/>
+		<result property="modelContent" column="model_content" columnIndex="3"/>
+		<result property="createAt" column="create_at" columnIndex="4"/>
+		<result property="cteateBy" column="cteate_by" columnIndex="5"/>
+	</resultMap>
+	
+	<select id="queryTMagazineModelById" parameterClass="long" resultMap="tMagazineModel" >
+    	SELECT * 
+    	FROM `magazine`.`t_magazine_model` 
+    	where model_id=#modelId#;
+    </select>
+    
+    <select id="queryAllTMagazineModel" resultMap="tMagazineModel">
+    	SELECT * 
+    	FROM `magazine`.`t_magazine_model`;
+    </select> 
+    
+    <update id="updateTMagazineModel" >
+    	update `magazine`.`t_magazine_model` 
+    	set
+    	model_type=#modelType#,
+    	model_content=#modelContent#,
+    	create_at=#createAt#,
+    	cteate_by=#cteateBy#
+    	where  model_id=#modelId#;
+   	</update>
+   	
+    <insert id="insertTMagazineModel" > 
+    	INSERT INTO `magazine`.`t_magazine_model` 
+    	( `model_type`, `model_content`, `create_at`, `cteate_by`) 
+    	VALUES 
+    	( #modelType#, #modelContent#, #createAt#, #cteateBy#);
+    	
+    	<selectKey  keyProperty="modelId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTMagazineModelById" parameterClass="long">
+    	delete from `magazine`.`t_magazine_model`  
+    	where  model_id=#modelId#;
+   	</delete>
+
+</sqlMap>

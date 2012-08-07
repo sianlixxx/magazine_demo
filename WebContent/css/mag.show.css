@@ -1,0 +1,284 @@
+.top_header {
+    background: url("../images/magazine/show/global_nav_bg.png") repeat-x scroll 0 0 transparent;
+    height: 35px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9998;
+}
+
+.in_header {
+	width: 960px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.in_header .logo {
+	width: 190px;
+	height: 34px;
+	position: absolute;
+	margin: 0 0 0 -27px;
+	background: url(../images/magazine/show/log.jpg) no-repeat;
+	background-repeat: no-repeat;
+	left: 0;
+	color: #fff;
+}
+
+.in_header .list {
+	float: left;
+	font-size: 14px;
+	margin: 0 0 0 80px;
+}
+
+.list li, .person li {
+	display: inline;
+}
+
+.in_header .list li a.link {
+	display: inline-block;
+	height: 16px;
+	line-height: 16px;
+	padding: 9px 10px 8px;
+}
+
+
+.in_header ul a:link { 
+    color:#fff; 
+}
+
+.in_header .list li, .in_header .search, .in_header .message, .in_header .person, .in_header .letter {
+	float: left;
+	position: relative;
+	display: inline;
+	z-index: 9998;
+}
+
+.in_header .search .search_input {
+	float: left;
+	color: #939393;
+	background-color: #fff;
+	border: 0;
+	width: 156px;
+	height: 22px;
+	line-height: 22px;
+	margin: 2px 0 0;
+	padding: 0 5px 0 10px;
+	padding: 1px 5px 0 10px	9;
+}
+
+.in_header .search .btn {
+	float: left;
+	margin: 1px 2px 0 0;
+	width: 27px;
+	height: 23px;
+	border: 0;
+	cursor: pointer;
+	background: none;
+}
+
+.in_header .search {
+	margin: 4px 0 0 100px;
+	width: 200px;
+	height: 25px;
+}
+
+.in_header .search .input {
+	float: left;
+	color: #939393;
+	background: none;
+	border: 0;
+	width: 156px;
+	height: 22px;
+	line-height: 22px;
+	margin: 2px 0 0;
+	padding: 0 5px 0 10px;
+	padding: 1px 5px 0 10px	9;
+}
+
+.in_header .person li a.link {
+	display: inline-block;
+	padding: 9px 9px 8px;
+	height: 16px;
+	line-height: 16px;
+}
+
+.clearfix {
+	display: block;
+}
+
+.clearfix::after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.in_header .right {
+	float: right;
+}
+
+/* 在IE6下，不添加下面内容，page中和header中间有空隙 */
+.clear_ie6 {
+	top: 0px;
+	position: absolute;
+	visibility: hidden;
+}
+
+.guideUser {
+	width: 960px;
+	height: 580px;
+	z-index: 1;
+	top: 0px;
+	position: relative;
+	left: 0px;
+	margin: 0 auto;
+}
+
+.guideUserbot {
+	position: relative;
+	margin: 0 auto;
+	width: 850px;
+	height: 580px;
+	overflow: hidden;
+	/*border: solid #666 1px;*/
+}
+
+.gUbtnPre {
+	display: block;
+	position: fixed;
+	_position:absolute;
+	left: 10px;
+	top: 40%;
+	z-index: 100;
+	width: 67px;
+	height: 67px;
+	cursor: pointer;
+	background: url(../images/magazine/show/arrow_left.png) 0 0 no-repeat;
+}
+
+.gUbtnNext {
+	display: block;
+	position: fixed;
+	_position:absolute;
+	right: 10px;
+	top: 40%;
+	z-index: 100;
+	width: 67px;
+	height: 67px;
+	cursor: pointer;
+	background: url(../images/magazine/show/arrow_right.png) 0 0 no-repeat;
+}
+
+.gUContF {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 3400px;
+	overflow: hidden;
+}
+
+.gUcommon {
+	width: 850px;
+	height: 580px;
+	float: left;
+}
+
+.preFooter {
+	margin: 10px auto;
+	height: 110px;
+	/*border: solid blue 1px;*/
+}
+
+.mag-left{
+    float: left;
+    width:420px;
+    height:570px;
+    margin-top: 5px;
+    margin-left: 5px;
+    border-right: solid black 1px;
+}
+
+.mag-right{
+    float: left;
+    width:400px;
+    height:570px;
+    margin-top: 5px;
+    margin-left: 10px;
+    /*border: solid blue 1px;*/
+}
+
+.mag-left-top, .mag-right-top {
+    width:380px;
+    height:200px;
+    margin:2px 0px;
+    border-bottom: solid black 1px;
+}
+.mag-left-middle, .mag-right-middle {
+    width:380px;
+    height:150px;
+    margin:2px 0px;
+    border-bottom: solid black 1px;
+}
+.mag-left-bottom, .mag-right-bottom {
+    width:380px;
+    height:200px;
+    margin:2px 0px;
+    /*border: solid blue 1px;*/
+}
+
+.mag-left-up, .mag-right-up{
+    width:395px;
+    height:290px;
+    margin:2px;
+    border-bottom: solid black 1px;
+}
+.mag-left-down, .mag-right-down {
+    width:395px;
+    height:270px;
+    margin:2px;
+    /*border: solid black 1px;*/
+}
+
+.mag-weibo {
+    margin: 5px;
+    padding: 5px;
+    /*border: solid blue 1px;*/
+}
+
+.mag-weibo-title {
+	
+}
+
+.mag-weibo-img {
+	position: relative;
+	/*border: solid blue 1px;*/
+}
+
+.mag-weibo-content {
+	width:220px;
+	margin: 5px;
+	padding: 0px;
+	text-align: left;
+	text-indent: 28px;
+	font-size: 14px;
+	/*border: solid blue 1px;*/
+}
+
+.mag-weibo-meta {
+	width:220px;
+	height: 20px;
+	padding: 3px;
+	text-align: left;
+	font: lighter ;
+	text-shadow: blue;
+	/*border: solid red 1px;*/
+}
+
+p.dropcap:first-letter {
+	float: left;
+	width: 30px;
+	font: 50px "Lucida Grande";
+	line-height: 30px;
+}

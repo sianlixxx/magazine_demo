@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="ie6"><![endif]--> 
+<!--[if IE 7]><html class="ie7"><![endif]--> 
+<!--[if IE 8]><html class="ie8"><![endif]--> 
+<!--[if gt IE 8]><html><![endif]-->
+<!--[if !IE]>--><html><!--<![endif]-->
+	<head>
+		<meta charset="utf-8" />
+		<title>show magazine</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	　　 <!--[if lt IE 9]>
+	　　　　 <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+		    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	　　 <![endif]-->
+	
+		<link rel="stylesheet" type="text/css" href="css/cupertino/jquery-ui-1.8.20.custom.css" />
+		<link rel="stylesheet" type="text/css" href="css/mag.css" />
+		
+		<style type="text/css">
+			.mag-nav {
+			    margin: 20px auto 20px auto;
+			    padding: 20px;
+			}
+			.mag-nav button {
+			    margin: 0px 20px;
+			}
+            #loginWeibo {
+                margin-left: 60px;
+                width: 80px;
+                height: 30px;
+                background-image: url("images/weibook/login_weibo.png");
+                background-repeat: no-repeat;
+            }
+		</style>
+	</head>
+	<body>
+	    <div id="page">
+	        <header>
+	        </header>
+	        <div id="content" class="clearfix">
+	            <div class="mag-nav">
+					<button>阅读杂志</button>
+					<button>编辑杂志</button>
+                    <input id="loginWeibo" type="button" value=""/>
+				</div>
+	        </div>
+	        <footer>
+	        </footer>
+	    </div>
+	    
+	    <script type="text/javascript" src="script/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="script/jquery-ui-1.8.20.custom.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$( ".mag-nav button:first" ).button({
+		            icons: {
+		                primary: "ui-icon-bookmark"
+		            }
+		        }).click(function(){
+		        	window.location.href = "html/show/showMagazine.html";
+		        }).next().button({
+		            icons: {
+		                primary: "ui-icon-pencil"
+		            }
+		        }).click(function(){
+		        	window.location.href = "html/edit/editMagazine.html";
+		        });
+				
+				//新浪微博认证
+				$("#loginWeibo").click(function() {
+					window.location.href = "/magazine_demo/oauth";
+				});
+			});
+	   </script>
+	</body>	
+</html>
+
+
+
+
+

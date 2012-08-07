@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TUserSubscribe">
+	 <resultMap id="tUserSubscribe" class="weimin.magazine.back.dao.pojo.TUserSubscribe">
+		<result property="subscribeId" column="subscribe_id" columnIndex="1"/>
+		<result property="userId" column="user_id" columnIndex="2"/>
+		<result property="departmentId" column="department_id" columnIndex="3"/>
+		<result property="createdAt" column="created_at" columnIndex="4"/>
+		<result property="cancelAt" column="cancel_at" columnIndex="5"/>
+		<result property="status" column="status" columnIndex="6"/>
+	</resultMap>
+	
+	<select id="queryTUserSubscribeById" parameterClass="long" resultMap="tUserSubscribe" >
+    	SELECT * 
+    	FROM `magazine`.`t_user_subscribe` 
+    	where subscribe_id=#subscribeId#;
+    </select>
+    
+    <select id="queryAllTUserSubscribe" resultMap="tUserSubscribe">
+    	SELECT * 
+    	FROM `magazine`.`t_user_subscribe`;
+    </select> 
+    
+    <update id="updateTUserSubscribe" >
+    	update `magazine`.`t_user_subscribe` 
+    	set
+    	user_id=#userId#,
+    	department_id=#departmentId#,
+    	created_at=#createdAt#,
+    	cancel_at=#cancelAt#,
+    	status=#status#
+    	where subscribe_id=#subscribeId#;
+   	</update>
+   	
+    <insert id="insertTUserSubscribe" > 
+    	INSERT INTO `magazine`.`t_user_subscribe` 
+    	( `user_id`,`department_id`,`created_at`,`cancel_at`,`status`) 
+    	VALUES 
+    	( #userId#, #departmentId#, #createdAt#, #cancelAt#, #status#);
+    	
+    	<selectKey  keyProperty="subscribeId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTUserSubscribeById" parameterClass="long">
+    	delete from `magazine`.`t_user_subscribe`  
+    	where subscribe_id=#subscribeId#;
+   	</delete>
+   	
+   	<!-- 根据用户id和编辑部id查找订阅关系  -->
+   	<select id="findSubscribe"  resultMap="tUserSubscribe" >
+    	SELECT * 
+    	FROM `magazine`.`t_user_subscribe` 
+    	where user_id=#userId# and department_id=#departmentId#;
+    </select>
+    
+    <!--  检索用户订阅的杂志  -->
+   	<select id="querySubscribeByUserId" parameterClass="long" resultMap="tUserSubscribe" >
+    	SELECT * 
+    	FROM `magazine`.`t_user_subscribe` 
+    	where user_id=#userId# and  status = 1;
+    </select>
+    
+      <!--  检索杂志被哪些用户订阅  -->
+   	<select id="querySubscribeByDepartmentId" parameterClass="long" resultMap="tUserSubscribe" >
+    	SELECT * 
+    	FROM `magazine`.`t_user_subscribe` 
+    	where department_id=#departmentId# ;
+    </select>
+    
+
+</sqlMap>

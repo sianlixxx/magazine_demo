@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TUserContribute">
+	 <resultMap id="tUserContribute" class="weimin.magazine.back.dao.pojo.TUserContribute">
+		<result property="contributeId" column="contribute_id" columnIndex="1"/>
+		<result property="userId" column="user_id" columnIndex="2"/>
+		<result property="departmentId" column="department_id" columnIndex="3"/>
+		<result property="weiboId" column="weibo_id" columnIndex="4"/>
+		<result property="createdAt" column="created_at" columnIndex="5"/>
+		<result property="status" column="status" columnIndex="6"/>
+		<result property="selectedAt" column="selected_at" columnIndex="7"/>
+		<result property="serialNumber" column="serial_number" columnIndex="8"/>
+		<result property="content" column="content" columnIndex="9"/>
+		<result property="contentType" column="content_type" columnIndex="10"/>
+		<result property="contentPic" column="content_pic" columnIndex="11"/>
+		<result property="contributeComment" column="contribute_comment" columnIndex="12"/>
+		<result property="contributeForward" column="contribute_forward" columnIndex="13"/>
+		
+	</resultMap>
+	
+	<select id="queryTUserContributeById" parameterClass="long" resultMap="tUserContribute" >
+    	SELECT * 
+    	FROM `magazine`.`t_user_contribute` 
+    	where contribute_id=#contributeId#;
+    </select>
+    
+    <select id="queryAllTUserContribute" resultMap="tUserContribute">
+    	SELECT * 
+    	FROM `magazine`.`t_user_contribute`;
+    </select> 
+    
+    <update id="updateTUserContribute" >
+    	update `magazine`.`t_user_contribute` 
+    	set
+    	user_id=#userId#,
+    	department_id=#departmentId#,
+    	weibo_id=#weiboId#,
+    	created_at=#createdAt#,
+    	status=#status#,
+    	selected_at=#selectedAt#,
+    	serial_number=#serialNumber#,
+    	content=#content#,
+    	content_type=#contentType#,
+    	content_pic=#contentPic#,
+    	contribute_comment=#contributeComment#,
+    	contribute_forward=#contributeForward#
+    	where contribute_id=#contributeId#;
+   	</update>
+   	
+    <insert id="insertTUserContribute" > 
+    	INSERT INTO `magazine`.`t_user_contribute` 
+    	(`user_id`,`department_id`,`weibo_id`,
+    	`created_at`,`status`,`selected_at`,`serial_number`,
+    	`content`,`content_type`,`content_pic`,`contribute_comment`,
+    	`contribute_forward`) 
+    	VALUES 
+    	( #userId#, #departmentId#, #weiboId#,
+    	#createdAt#, #status#, #selectedAt#,#serialNumber#,
+    	#content#, #contentType#,#contentPic#, #contributeComment#,
+    	#contributeForward#);
+    	
+    	<selectKey  keyProperty="contributeId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTUserContributeById" parameterClass="long">
+    	delete from `magazine`.`t_user_contribute`  
+    	where contribute_id=#contributeId#;
+   	</delete>
+   	
+   	<!-- 判断此投稿记录是否存在 -->
+   	<select id="queryContribute"  resultMap="tUserContribute" >
+    	SELECT * 
+    	FROM `magazine`.`t_user_contribute` 
+    	where user_id=#userId# and department_id=#departmentId# and weibo_id=#weiboId#;
+    </select>
+    
+    <!-- 从db中收集所有新稿件； -->
+    <select id="queryNewContruibuteByUserId" parameterClass="long" resultMap="tUserContribute" >
+    	SELECT * 
+    	FROM `magazine`.`t_user_contribute` 
+    	where user_id=#userId# and status=0;
+    </select>
+
+</sqlMap>

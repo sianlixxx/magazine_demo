@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TTopMagazine">
+	 <resultMap id="tTopMagazine" class="weimin.magazine.back.dao.pojo.TTopMagazine">
+		<result property="topMagazineId" column="top_magazine_id" columnIndex="1"/>
+		<result property="departmentType" column="department_type" columnIndex="2"/>
+		<result property="departmentDomain" column="department_domain" columnIndex="3"/>
+		<result property="exRanking" column="ex_ranking" columnIndex="4"/>
+		<result property="exSubRanking" column="ex_sub_ranking" columnIndex="5"/>
+		<result property="ranking" column="ranking" columnIndex="6"/>
+		<result property="subRanking" column="sub_ranking" columnIndex="7"/>
+	</resultMap>
+	
+	<select id="queryTTopMagazineById" parameterClass="long" resultMap="tTopMagazine" >
+    	SELECT * 
+    	FROM `magazine`.`t_top_magazine` 
+    	where top_magazine_id=#topMagazineId#;
+    </select>
+    
+    <select id="queryAllTTopMagazine" resultMap="tTopMagazine">
+    	SELECT * 
+    	FROM `magazine`.`t_top_magazine`;
+    </select> 
+    
+    <update id="updateTTopMagazine" >
+    	update `magazine`.`t_top_magazine` 
+    	set
+    	department_type=#departmentType#,
+    	department_domain=#departmentDomain#,
+    	ex_ranking=#exRanking#,
+    	ex_sub_ranking=#exSubRanking#,
+    	ranking=#ranking#,
+    	sub_ranking=#subRanking#
+    	where top_magazine_id=#topMagazineId#;
+   	</update>
+   	
+    <insert id="insertTTopMagazine" > 
+    	INSERT INTO `magazine`.`t_top_magazine` 
+    	( `department_type`,`department_domain`,`ex_ranking`,`ex_sub_ranking`,`ranking`,`sub_ranking`) 
+    	VALUES 
+    	( #departmentType#, #departmentDomain#, #exRanking#,#exSubRanking#,#ranking#, #subRanking#);
+    	
+    	<selectKey  keyProperty="topMagazineId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTTopMagazineById" parameterClass="long">
+    	delete from `magazine`.`t_top_magazine`  
+    	where top_magazine_id=#topMagazineId#;
+   	</delete>
+
+</sqlMap>

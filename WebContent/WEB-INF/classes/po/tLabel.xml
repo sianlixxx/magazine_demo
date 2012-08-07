@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TLabel">  
+   
+    
+    <resultMap id="tLabel" class="weimin.magazine.back.dao.pojo.TLabel">
+		<result property="labelId" column="label_id" columnIndex="1"/>
+		<result property="name" column="name" columnIndex="2"/>
+		<result property="createdAt" column="created_at" columnIndex="3"/>
+		<result property="frequency" column="frequency" columnIndex="4"/>
+		<result property="userId" column="user_id" columnIndex="5"/>
+		<result property="domainType" column="domain_type" columnIndex="6"/>
+	</resultMap>
+    
+    
+    <select id="queryTLabelById" parameterClass="long" resultMap="tLabel" >
+    	SELECT * 
+    	FROM `magazine`.`t_label` 
+    	where label_id=#labelId#;
+    </select> 
+    
+    <select id="queryAllTLabel" resultMap="tLabel">
+    	SELECT * 
+    	FROM `magazine`.`t_label`;
+    </select> 
+    
+    <update id="updateTLabel" >
+    	update `magazine`.`t_label` 
+    	set
+    	name=#name#,
+    	created_at=#createdAt#,
+    	frequency=#frequency#,
+    	user_id=#userId#,
+    	domain_type=#domainType#
+    	where label_id=#labelId#;
+   	</update>
+   	
+    <insert id="insertTLabel" > 
+    	INSERT INTO `magazine`.`t_label` 
+    	( `name`, `created_at`, `frequency`, `user_id`, `domain_type`) 
+    	VALUES 
+    	( #name#, #createdAt#, #frequency#, #userId#,#domainType#);
+    	
+    	<selectKey  keyProperty="labelId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTLabelById" parameterClass="long">
+    	delete from `magazine`.`t_label`  
+    	where label_id=#labelId#;
+   	</delete>
+   	
+   	 <!--  根获得用户标签-->
+   	<select id="queryLabelsByUserId" parameterClass="long" resultMap="tLabel">
+    	SELECT *  from `magazine`.`t_label`  
+    	where user_id=#userId# and domain_type = 0;
+   	</select>
+    
+     <!--  根据标签检索编辑部-->
+     <select id="queryDepartmentIdsByLabel" parameterClass="String" resultMap="tLabel">
+    	SELECT *  from `magazine`.`t_label`  
+    	where name like #name# and domain_type = 1;
+   	</select>
+   	
+   	
+     <!--  统计某个标签的使用次数-->
+     <select id="countLabelsFrequency" parameterClass="String" resultClass="int">
+    	SELECT count(*) FROM `magazine`.`t_label` 
+    	where name like #name# ;
+   	 </select>
+   	 
+   	  <!--  统计某个标签的最大使用次数-->
+     <select id="maxLabelsFrequency" parameterClass="String" resultClass="int">
+    	SELECT max(frequency) FROM `magazine`.`t_label` 
+    	where name like #name# ;
+   	 </select>
+   	 
+   	  <!--  删除用户某个标签,不区分杂志标签和用户标签  -->
+   	 <delete id="deleteLabel" >
+    	delete from `magazine`.`t_label`  
+    	where user_id=#userId# and name=#name#;
+   	 </delete>
+   	 
+   	 <!--  获取所有系统标签，去除重复，按照现有表中使用次数排列-->
+     <select id="queryRecommendLabels"  resultMap="tLabel">
+     	select *  from `magazine`.`t_label` 
+     	group by name  
+     	order by count(name) desc;
+   	</select>
+   	
+</sqlMap>

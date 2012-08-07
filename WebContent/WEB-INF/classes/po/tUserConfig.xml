@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TUserConfig">
+	 <resultMap id="tUserConfig" class="weimin.magazine.back.dao.pojo.TUserConfig">
+		<result property="userConfigId" column="user_config_id" columnIndex="1"/>
+		<result property="userId" column="user_id" columnIndex="2"/>
+		<result property="configType" column="config_type" columnIndex="3"/>
+		<result property="configValue" column="config_value" columnIndex="4"/>
+	</resultMap>
+	
+	<select id="queryTUserConfigById" parameterClass="long" resultMap="tUserConfig" >
+    	SELECT * 
+    	FROM `magazine`.`t_user_config` 
+    	where user_config_id=#userConfigId#;
+    </select>
+    
+    <select id="queryAllTUserConfig" resultMap="tUserConfig">
+    	SELECT * 
+    	FROM `magazine`.`t_user_config`;
+    </select> 
+    
+    <update id="updateTUserConfig" >
+    	update `magazine`.`t_user_config` 
+    	set
+    	user_id=#userId#,
+    	config_type=#configType#,
+    	config_value=#configValue#
+    	where user_config_id=#userConfigId#;
+   	</update>
+   	
+    <insert id="insertTUserConfig" >
+    	INSERT INTO `magazine`.`t_user_config` 
+    	( `user_id`,`config_type`,`config_value`) 
+    	VALUES 
+    	( #userId#, #configType#, #configValue#);
+    	<selectKey  keyProperty="userConfigId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTUserConfigById" parameterClass="long">
+    	delete from `magazine`.`t_user_config`  
+    	where user_config_id=#userConfigId#;
+   	</delete>
+
+</sqlMap>

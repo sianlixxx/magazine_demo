@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap  namespace="TDepartment">
+	 <resultMap id="tDepartment" class="weimin.magazine.back.dao.pojo.TDepartment">
+		<result property="departmentId" column="department_id" columnIndex="1"/>
+		<result property="createrUserId" column="creater_user_id" columnIndex="2"/>
+		<result property="name" column="name" columnIndex="3"/>
+		<result property="createdAt" column="created_at" columnIndex="4"/>
+		<result property="releaseCount" column="release_count" columnIndex="5"/>
+		<result property="subscribeCount" column="subscribe_count" columnIndex="6"/>
+		<result property="editerCount" column="editer_count" columnIndex="7"/>
+		<result property="editerChiefCount" column="editer_chief_count" columnIndex="8"/>
+		<result property="description" column="description" columnIndex="9"/>
+		<result property="totalReadCount" column="total_read_count" columnIndex="10"/>
+		<result property="totalContributeCount" column="total_contribute_count" columnIndex="11"/>
+		<result property="totalPublishCount" column="total_publish_count" columnIndex="12"/>
+		<result property="departmentLevel" column="department_level" columnIndex="13"/>
+		<result property="departmentScore" column="department_score" columnIndex="14"/>
+		<result property="departmentType" column="department_type" columnIndex="15"/>
+		<result property="departmentDomain" column="department_domain" columnIndex="16"/>
+		<result property="logoUrl" column="logo_url" columnIndex="16"/>
+	</resultMap>
+	
+	 <resultMap id="departmentId" class="java.lang.Long">
+	 <result property="departmentId" column="department_id" columnIndex="1"/>
+	</resultMap>
+	
+	<select id="queryTDepartmentById" parameterClass="long" resultMap="tDepartment" >
+    	SELECT * 
+    	FROM `magazine`.`t_department` 
+    	where department_id=#id#;
+    </select>
+    
+    <select id="queryAllTDepartment" resultMap="tDepartment">
+    	SELECT * 
+    	FROM `magazine`.`t_department`;
+    </select> 
+    
+    <update id="updateTDepartment" >
+    	update `magazine`.`t_department` 
+    	set
+    	creater_user_id=#createrUserId#,
+    	name=#name#,
+    	created_at=#createdAt#,
+    	release_count=#releaseCount#,
+    	subscribe_count=#subscribeCount#,
+    	editer_count=#editerCount#,
+    	editer_chief_count=#editerChiefCount#,
+    	description=#description#,
+    	total_read_count=#totalReadCount#,
+    	total_contribute_count=#totalContributeCount#,
+    	total_publish_count=#totalPublishCount#,
+    	department_level=#departmentLevel#,
+    	department_score=#departmentScore#,
+    	department_type=#departmentType#,
+    	department_domain = #departmentDomain#,
+    	logo_url= #logoUrl#
+    	where 
+    	department_id=#departmentId#;
+   	</update>
+   	
+    <insert id="insertTDepartment"> 
+    	INSERT INTO `magazine`.`t_department`
+    	( `creater_user_id`,`name`,`created_at`,
+    	`release_count`,`subscribe_count`,`editer_count`,`editer_chief_count`,
+    	`description`,`total_read_count`,`total_contribute_count`,`total_publish_count`,
+    	`department_level`,`department_score`,`department_type`,`department_domain`,
+    	logo_url) 
+    	VALUES 
+    	( #createrUserId#,#name#,#createdAt#,
+    	#releaseCount#,#subscribeCount#,#editerCount#,#editerChiefCount#,
+    	#description#,#totalReadCount#,#totalContributeCount#,#totalPublishCount#,
+    	#departmentLevel#,#departmentScore#,#departmentType#,#departmentDomain#,
+    	#logoUrl#);
+    	
+    	<selectKey  keyProperty="departmentId"  resultClass="long">
+        	SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+   	
+   	<delete id="deleteTDepartmentById" parameterClass="long">
+    	delete from `magazine`.`t_department`  
+    	where department_id = #departmentId#;
+   	</delete>
+   	
+   	<!--  安照综合积分排序，总排行榜；-->
+   	<select id="getTop"  resultMap="tDepartment">
+    	select *
+    	from magazine.t_department 
+    	ORDER BY  department_score DESC;
+    </select>
+   	
+   	<!--  安照综合积分排序，分类排行榜；-->
+   	<select id="getTopByTheme" parameterClass="int" resultMap="tDepartment">
+    	select *
+    	from magazine.t_department
+    	where department_type = #type#
+    	ORDER BY  department_score DESC;
+    </select>
+    
+    
+   <!--  查找用户所创建的杂志社；-->
+   	<select id="queryByCreater" parameterClass="long" resultMap="tDepartment">
+    	select *
+    	from magazine.t_department
+    	where creater_user_id = #createrUserId#;
+    </select>
+   
+
+</sqlMap>
